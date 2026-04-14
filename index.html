@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person</title>
+    <style>
+        :root {
+            --pink: #ff4d6d;
+            --soft-pink: #fff0f3;
+            --dark-pink: #c9184a;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--soft-pink);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .screen {
+            display: none;
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .active { display: block; }
+
+        /* Password Screen */
+        input {
+            padding: 10px;
+            font-size: 1.2rem;
+            border: 2px solid var(--pink);
+            border-radius: 10px;
+            outline: none;
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--pink);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        /* Countdown */
+        #countdown-text {
+            font-size: 5rem;
+            font-weight: bold;
+            color: var(--dark-pink);
+        }
+
+        /* Slideshow & Hearts */
+        .slideshow-container {
+            position: relative;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .slideshow-container img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+        }
+
+        .slideshow-container img.active-img { display: block; }
+
+        .heart {
+            position: absolute;
+            color: var(--pink);
+            font-size: 20px;
+            animation: fly 3s linear infinite;
+            z-index: -1;
+        }
+
+        /* Story Page */
+        .story-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            line-height: 1.6;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fly {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="screen1" class="screen active">
+        <h2>Enter Our Special Code</h2>
+        <input type="password" id="passwordInput" placeholder="Enter 4 digits...">
+        <br>
+        <button onclick="checkPassword()">Unlock</button>
+    </div>
+
+    <div id="screen2" class="screen">
+        <div id="countdown-text">3</div>
+    </div>
+
+    <div id="screen3" class="screen">
+        <h3 id="quote">"You are my favorite notification."</h3>
+        <div class="slideshow-container" id="heart-area">
+            <img src="./IMG_20250330_133501_974.jpg" class="active-img">
+            <img src="./IMG_20250330_133501_974.jpg">
+            <img src="./IMG_20250330_133501_974.jpg">
+        </div>
+        <p>When did we start our love?</p>
+        <input type="date" id="dateInput">
+        <br>
+        <button onclick="checkDate()">Confirm Date</button>
+    </div>
+
+    <div id="screen4" class="screen">
+        <div class="story-box">
+            <h2>GEENU❤️NIVI</h2>
+            <p>“You are my today and all of my tomorrows 💙”</p>
+            <p>“Every moment with you is special 💕”</p>
+            <p>From the day we met, my life changed forever 💕<br><br>
+            Every smile, every moment with you became my happiness ✨<br><br>
+            You are my safe place, my peace, my love 💙<br><br>
+            I never knew love could be this beautiful until I met you 💖
+            You are not just my partner, you are my peace, my happiness, and my home 💙</p>
+            <br><br>
+<p>In your arms, I found the comfort I never knew I needed 💕
+Your love makes my world brighter and my heart lighter ✨
+No matter what happens, I will always stand beside you and support you 🤝💖
+You take care of me in ways I never imagined, and I’m so grateful for you 💙
+Loving you is the easiest and most beautiful thing in my life 🌸 </p>
+<br><br>
+<p>You are the reason behind my smile every single day 😊💖
+My heart feels safe whenever I think of you 💙
+I don’t need anything else in this world when I have you ✨
+Every moment with you feels like a beautiful dream 💫
+You are my today, my tomorrow, and my forever 💕</p>
+<br><br>
+<p>Thank you for loving me even on my worst days 💙
+You understand me without words, and that means everything to me 🥹
+I promise to love you, care for you, and stand with you always 🤍
+You are my strength when I feel weak 💕</p>
+<br><br>
+<p> so lucky to call you mine 💖
+Thank you for being mine 💙
+I love you more than words can ever express 💕
+Forever with you is all I ever want 💖
+You are my everything ❤️
+I will always choose you 💍</p>
+        
+        <h1>I LOVE YOU THANGO</h1>
+        
+
+            <hr>
+            <h3>Thank you for being mine ❤️</h3>
+        </div>
+    </div>
+
+    <script>
+        function showScreen(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // 1. Password Check
+        function checkPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            if (pass === "1820") {
+                showScreen('screen2');
+                startCountdown();
+            } else {
+                alert("Wrong password, try again!");
+            }
+        }
+
+        // 2. Countdown Logic
+        function startCountdown() {
+            let count = 3;
+            const timer = setInterval(() => {
+                count--;
+                if (count >= 0) {
+                    document.getElementById('countdown-text').innerText = count;
+                } else {
+                    clearInterval(timer);
+                    showScreen('screen3');
+                    startSlideshow();
+                    createHearts();
+                }
+            }, 1000);
+        }
+
+        // 3. Slideshow Logic
+        function startSlideshow() {
+            const images = document.querySelectorAll('.slideshow-container img');
+            const quotes = [
+                "You are my favorite notification.",
+                "Every love story is beautiful, but ours is my favorite.",
+                "Home is wherever I'm with you."
+            ];
+            let i = 0;
+            setInterval(() => {
+                images[i].classList.remove('active-img');
+                i = (i + 1) % images.length;
+                images[i].classList.add('active-img');
+                document.getElementById('quote').innerText = quotes[i];
+            }, 3000);
+        }
+
+        // Flying Hearts
+        function createHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }, 300);
+        }
+
+        // 4. Date Check (Change '2023-05-15' to your actual start date)
+        function checkDate() {
+            const date = document.getElementById('dateInput').value;
+            if (date === "2023-10-01") { // FORMAT: YYYY-MM-DD
+                showScreen('screen4');
+            } else {
+                alert("That's not the right date! Try again, babe.");
+            }
+        }
+    </script>
+</body>
+</html>
